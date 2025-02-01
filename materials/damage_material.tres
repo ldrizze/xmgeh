@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dah4ivw2uoeo"]
+
+[ext_resource type="Shader" path="res://materials/damage_material.gdshader" id="1_600qo"]
+
+[resource]
+shader = ExtResource("1_600qo")
+shader_parameter/enabled = false
+shader_parameter/color = Color(1, 1, 1, 0.717647)

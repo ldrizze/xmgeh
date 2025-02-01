@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://lmh2uxdp81cu"]
+
+[ext_resource type="Script" path="res://skills/skill_base.gd" id="1_8ks3b"]
+
+[node name="SkillBase" type="Node"]
+script = ExtResource("1_8ks3b")
+
+[node name="Bullets" type="Node" parent="."]
