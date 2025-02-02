@@ -101,7 +101,6 @@ script = ExtResource("1_4spgw")
 player_damage_interval_s = 2.0
 enemy_velocity = 35.0
 hp = 10.0
-contact_damage = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_nq15f")

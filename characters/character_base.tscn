@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3wxwx1rau8ke"]
+[gd_scene load_steps=14 format=3 uid="uid://b3wxwx1rau8ke"]
 
 [ext_resource type="Texture2D" uid="uid://dojbq1kmh1mfo" path="res://vendor/tinyDungeon/wizard.png" id="1_n4pnx"]
 [ext_resource type="Material" uid="uid://dah4ivw2uoeo" path="res://materials/damage_material.tres" id="2_lm4h3"]
@@ -6,25 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://dra2mk7t6ek18" path="res://vendor/tinyDungeon/tilemap.png" id="3_73357"]
 [ext_resource type="PackedScene" uid="uid://lmh2uxdp81cu" path="res://skills/skill_base.tscn" id="4_8dqlk"]
 [ext_resource type="PackedScene" uid="uid://dtytvxd6ovx" path="res://skills/bullets/mage_ball.tscn" id="4_rvccc"]
+[ext_resource type="Texture2D" uid="uid://cql36a7f36bs5" path="res://sprites/progressbar-out.png" id="7_nwquq"]
+[ext_resource type="Texture2D" uid="uid://be5drloc2pyit" path="res://sprites/progressbar.png" id="7_o6cpj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6vmq"]
 size = Vector2(14, 14)
-
-[sub_resource type="Animation" id="Animation_npce3"]
-resource_name = "damage"
-length = 0.33
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.296667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false]
-}
 
 [sub_resource type="Animation" id="Animation_vgald"]
 length = 0.001
@@ -51,6 +37,22 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_npce3"]
+resource_name = "damage"
+length = 0.33
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.296667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_ftoam"]
@@ -88,8 +90,8 @@ _data = {
 }
 
 [node name="CharacterBase" type="CharacterBody2D"]
-z_index = 3
-collision_mask = 4
+z_index = 5
+collision_mask = 132
 motion_mode = 1
 floor_constant_speed = true
 script = ExtResource("2_ojt37")
@@ -104,14 +106,14 @@ shape = SubResource("RectangleShape2D_n6vmq")
 [node name="WeaponPivot" type="Node2D" parent="."]
 
 [node name="Weapon" type="Sprite2D" parent="WeaponPivot"]
-position = Vector2(16, 0)
+position = Vector2(28, 0)
 rotation = 1.5708
 texture = ExtResource("3_73357")
 region_enabled = true
 region_rect = Rect2(153, 170, 16, 16)
 
 [node name="Aim" type="Marker2D" parent="WeaponPivot"]
-position = Vector2(26, -3.55271e-14)
+position = Vector2(8, 1.004e-11)
 rotation = 1.5708
 scale = Vector2(0.7, 0.7)
 
@@ -127,3 +129,20 @@ spawn_interval_s = 3.0
 libraries = {
 "": SubResource("AnimationLibrary_d1bbn")
 }
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -10.0
+offset_top = 9.0
+offset_right = 10.0
+offset_bottom = 29.0
+
+[node name="HPBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+offset_right = 60.0
+offset_bottom = 16.0
+scale = Vector2(0.35, 0.35)
+value = 100.0
+texture_over = ExtResource("7_nwquq")
+texture_progress = ExtResource("7_o6cpj")

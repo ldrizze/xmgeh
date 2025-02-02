@@ -7,8 +7,11 @@ signal on_dead
 @export_category("Movement settings")
 @export var movement_velocity: float = 100
 @export var hp: float = 100.0
+@export var hud: GameHUD
+@export var xp: float = 0.0
 
 var _dead: bool = false
+@onready var _max_hp = hp
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -50,5 +53,31 @@ func take_damage(damage: float):
 	
 	if hp <= 0:
 		_dead = true
+		$WeaponPivot.hide()
 		on_dead.emit()
 		$DamageAnimation.play("dead")
+	
+	# update UI
+	_update_hp_bar()
+
+func use_item(item: ItemBase):
+	if item.item_type == ItemBase.EItemType.POTION:
+		hp += 50.0
+		
+		if hp > _max_hp: hp = _max_hp
+		_update_hp_bar()
+
+func gain_xp(_xp: float):
+	xp += _xp
+	
+	if xp >= 100.0:
+		level_up()
+		xp -= 100.0
+		
+	hud.set_xp(xp)
+
+func level_up():
+	pass
+
+func _update_hp_bar():
+	$Control/HPBar.value = hp

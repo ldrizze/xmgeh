@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://drqmrfvfnc2i4"]
+
+[ext_resource type="Script" path="res://droppers/base_item_dropper.gd" id="1_ow62b"]
+[ext_resource type="Texture2D" uid="uid://dra2mk7t6ek18" path="res://vendor/tinyDungeon/tilemap.png" id="1_v8jnc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwg5j"]
+size = Vector2(12, 14)
+
+[node name="BaseItemDropper" type="StaticBody2D"]
+collision_layer = 36
+collision_mask = 0
+script = ExtResource("1_ow62b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v8jnc")
+region_enabled = true
+region_rect = Rect2(170, 102, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rwg5j")

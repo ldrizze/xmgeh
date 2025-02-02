@@ -57,6 +57,9 @@ move_right={
 2d_physics/layer_3="obstacles"
 2d_physics/layer_4="character_bullet"
 2d_physics/layer_5="enemy_bullet"
+2d_physics/layer_6="item_drop"
+2d_physics/layer_7="item_collect"
+2d_physics/layer_8="item_use"
 
 [rendering]
 

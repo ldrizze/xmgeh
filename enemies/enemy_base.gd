@@ -6,6 +6,7 @@ class_name EnemyBase
 @export var enemy_velocity: float = 100
 @export var hp: float = 100
 @export var contact_damage: float = 10.0
+@export var xp: float = 10.0
 
 var _character_reference: CharacterBase
 var _started: bool = false
@@ -53,7 +54,9 @@ func start(reference: CharacterBase):
 
 func take_damage(damage: float, _direction: Vector2 = Vector2.ZERO):
 	hp -= damage
-	if hp <= 0: $DamageShaderPlayer.play("death")
+	if hp <= 0: 
+		$DamageShaderPlayer.play("death")
+		_character_reference.gain_xp(xp)
 	else: $DamageShaderPlayer.play("damage")
 
 func _on_damage_shader_player_animation_finished(anim_name):

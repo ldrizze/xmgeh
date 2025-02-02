@@ -1,23 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6uwf6nu3oj4p"]
+[gd_scene load_steps=8 format=3 uid="uid://c6uwf6nu3oj4p"]
 
 [ext_resource type="PackedScene" uid="uid://8xnpc3jfqqfv" path="res://maps/dungeon.tscn" id="1_8qds4"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_tp6n2"]
 [ext_resource type="PackedScene" uid="uid://b3wxwx1rau8ke" path="res://characters/character_base.tscn" id="2_hvxcq"]
 [ext_resource type="PackedScene" uid="uid://c4gv6srb77ne1" path="res://enemies/enemy_spawner.tscn" id="4_026y3"]
+[ext_resource type="PackedScene" uid="uid://dgs1vt4hovtgh" path="res://characters/HUD.tscn" id="4_ne7x5"]
+[ext_resource type="PackedScene" uid="uid://duukuve0kie1d" path="res://itens/item_base.tscn" id="5_thlpx"]
+[ext_resource type="Script" path="res://scenes/game_manager.gd" id="7_vlsjh"]
 
 [node name="SceneRoot" type="Node2D"]
 script = ExtResource("1_tp6n2")
 
 [node name="DungeonRoot" parent="." instance=ExtResource("1_8qds4")]
 
-[node name="CharacterBase" parent="." instance=ExtResource("2_hvxcq")]
+[node name="CharacterBase" parent="." node_paths=PackedStringArray("hud") instance=ExtResource("2_hvxcq")]
 movement_velocity = 50.0
+hud = NodePath("../CanvasLayer/Hud")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBase"]
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
-[node name="EnemySpawner" parent="." node_paths=PackedStringArray("character_reference") instance=ExtResource("4_026y3")]
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("character_reference", "top_left_spawn", "bottom_right_spawn") instance=ExtResource("4_026y3")]
 wave_time = 10.0
 character_reference = NodePath("../CharacterBase")
+enabled = true
+top_left_spawn = NodePath("TopLeftSpawn")
+bottom_right_spawn = NodePath("BottomRight")
+
+[node name="TopLeftSpawn" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(-564, -457)
+
+[node name="BottomRight" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(1336, 1054)
+
+[node name="ItemBase" parent="." node_paths=PackedStringArray("character_reference") instance=ExtResource("5_thlpx")]
+position = Vector2(-205, -72)
+character_reference = NodePath("../CharacterBase")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("4_ne7x5")]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("hud")]
+script = ExtResource("7_vlsjh")
+hud = NodePath("../CanvasLayer/Hud")
