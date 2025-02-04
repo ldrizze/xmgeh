@@ -3,7 +3,8 @@ extends Node
 class_name SkillBase
 
 enum ESkillType {
-	BULLET
+	BULLET,
+	POWER
 }
 
 @export var destroy_at_distance: float = 500.0
@@ -38,11 +39,7 @@ func _process(delta):
 			_spawn_bullet()
 
 func _spawn_bullet():
-	var bullet_instance = bullet_resource.instantiate() as BulletBase
-	bullet_instance._destroy_after_distance = destroy_at_distance
-	bullet_instance._destroy_after_time = destroy_after_s
-	bullet_instance._destroy_on_hit = true
-	bullet_instance.global_position = character_base_instance.get_aim_position()
+	var bullet_instance = _create_bullet_instance()
 	$Bullets.add_child(bullet_instance)
 	
 	bullet_instance.shoot(
@@ -50,6 +47,25 @@ func _spawn_bullet():
 			character_base_instance.get_aim_angle()
 			).normalized() * bullet_velocity
 	)
+	
+	if character_base_instance.level >= 2:
+		var second_bullet = _create_bullet_instance()
+		$Bullets.add_child(second_bullet)
+
+		second_bullet.shoot(
+			Vector2.RIGHT.rotated(
+			character_base_instance.get_aim_angle() + deg_to_rad(15)
+			).normalized() * bullet_velocity
+		)
 
 func _on_player_dead():
 	_player_dead = true
+
+func _create_bullet_instance() -> BulletBase:
+	var bullet_instance = bullet_resource.instantiate() as BulletBase
+	bullet_instance._destroy_after_distance = destroy_at_distance
+	bullet_instance._destroy_after_time = destroy_after_s
+	bullet_instance._destroy_on_hit = true
+	bullet_instance.global_position = character_base_instance.get_aim_position()
+	bullet_instance.global_position = character_base_instance.get_aim_position()
+	return bullet_instance

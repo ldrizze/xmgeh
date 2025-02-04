@@ -13,6 +13,7 @@ var _started: bool = false
 var _in_damage: bool = false
 var _damage_interval_elapsed_time: float = 0.0
 var _player_dead: bool = false
+var _dead: bool = false
 @onready var _initial_velocity: float = enemy_velocity
 
 func _physics_process(delta):
@@ -53,10 +54,14 @@ func start(reference: CharacterBase):
 	_character_reference.connect("on_dead", _on_player_dead)
 
 func take_damage(damage: float, _direction: Vector2 = Vector2.ZERO):
+	if hp <= 0: return
+
 	hp -= damage
-	if hp <= 0: 
+	if hp <= 0:
+		_dead = true
 		$DamageShaderPlayer.play("death")
 		_character_reference.gain_xp(xp)
+		$CollisionShape2D.set_deferred("disabled", true)
 	else: $DamageShaderPlayer.play("damage")
 
 func _on_damage_shader_player_animation_finished(anim_name):

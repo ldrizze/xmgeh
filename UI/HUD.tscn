@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgs1vt4hovtgh"]
+
+[ext_resource type="Theme" uid="uid://doq68ktd7o5fw" path="res://UI/game_theme.tres" id="1_1hx5v"]
+[ext_resource type="Script" path="res://UI/hud.gd" id="1_53x0p"]
+[ext_resource type="Texture2D" uid="uid://b82e0jqq4h8wb" path="res://sprites/xp-bar-over.png" id="1_wvxue"]
+[ext_resource type="Texture2D" uid="uid://dd1i8qp3jt3gj" path="res://sprites/xp-bar-in.png" id="2_y8wki"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qbugn"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_iqh6v"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_wec4d"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_18ynr"]
+font_size = 32
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1hx5v")
+script = ExtResource("1_53x0p")
+metadata/_edit_horizontal_guides_ = [13.0]
+
+[node name="XP" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 14.0
+offset_right = 400.0
+offset_bottom = 54.0
+grow_horizontal = 2
+texture_over = ExtResource("1_wvxue")
+texture_progress = ExtResource("2_y8wki")
+
+[node name="Time" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 13.0
+offset_right = -16.0
+offset_bottom = 53.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="Minutes" type="Label" parent="Time"]
+layout_mode = 2
+text = "11
+"
+label_settings = SubResource("LabelSettings_qbugn")
+
+[node name="Separator" type="Label" parent="Time"]
+layout_mode = 2
+text = ":"
+label_settings = SubResource("LabelSettings_iqh6v")
+
+[node name="Seconds" type="Label" parent="Time"]
+layout_mode = 2
+text = "11
+"
+label_settings = SubResource("LabelSettings_wec4d")
+
+[node name="Level" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -476.0
+offset_top = 13.0
+offset_right = -416.0
+offset_bottom = 53.0
+grow_horizontal = 2
+text = "999"
+label_settings = SubResource("LabelSettings_18ynr")
+horizontal_alignment = 2

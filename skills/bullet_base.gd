@@ -12,6 +12,7 @@ var _destroy_after_distance: float = -1
 var _elapsed_time_alive: float = 0
 var _initial_position: Vector2
 var _colliding: bool = false
+var _hit_enemy: EnemyBase
 
 func _ready():
 	hide()
@@ -32,19 +33,18 @@ func _process(delta):
 			):
 			queue_free()
 
-func shoot(direction: Vector2):
+func shoot(direction: Vector2, _bullet_number: int = 1):
 	_shot_direction = direction
 	_started = true
 	show()
 
-func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	_colliding = true
-
 func _on_area_2d_body_entered(body):
 	_colliding = true
-	
 	if body.has_method("get_collision_layer") and body.get_collision_layer() == 2:
-		(body as EnemyBase).take_damage(damage)
+		_hit_enemy = (body as EnemyBase)
+		if _hit_enemy._dead: _colliding = false
+		else: _hit_enemy.take_damage(damage)
+		
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	_colliding = true

@@ -3,12 +3,14 @@ extends CharacterBody2D
 class_name CharacterBase
 
 signal on_dead
+signal on_level_up(level: int)
 
 @export_category("Movement settings")
 @export var movement_velocity: float = 100
 @export var hp: float = 100.0
 @export var hud: GameHUD
 @export var xp: float = 0.0
+@export var level: int = 1
 
 var _dead: bool = false
 @onready var _max_hp = hp
@@ -77,7 +79,8 @@ func gain_xp(_xp: float):
 	hud.set_xp(xp)
 
 func level_up():
-	pass
+	level += 1
+	on_level_up.emit(level)
 
 func _update_hp_bar():
 	$Control/HPBar.value = hp

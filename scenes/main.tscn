@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_tp6n2"]
 [ext_resource type="PackedScene" uid="uid://b3wxwx1rau8ke" path="res://characters/character_base.tscn" id="2_hvxcq"]
 [ext_resource type="PackedScene" uid="uid://c4gv6srb77ne1" path="res://enemies/enemy_spawner.tscn" id="4_026y3"]
-[ext_resource type="PackedScene" uid="uid://dgs1vt4hovtgh" path="res://characters/HUD.tscn" id="4_ne7x5"]
+[ext_resource type="PackedScene" uid="uid://dgs1vt4hovtgh" path="res://UI/HUD.tscn" id="4_ne7x5"]
 [ext_resource type="PackedScene" uid="uid://duukuve0kie1d" path="res://itens/item_base.tscn" id="5_thlpx"]
 [ext_resource type="Script" path="res://scenes/game_manager.gd" id="7_vlsjh"]
 
@@ -43,6 +43,7 @@ character_reference = NodePath("../CharacterBase")
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("4_ne7x5")]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("hud")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("hud", "character")]
 script = ExtResource("7_vlsjh")
 hud = NodePath("../CanvasLayer/Hud")
+character = NodePath("../CharacterBase")

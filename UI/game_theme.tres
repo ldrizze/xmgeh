@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://doq68ktd7o5fw"]
+
+[ext_resource type="FontFile" uid="uid://uw83pdxyffmk" path="res://vendor/Kenney Blocks.ttf" id="1_rhfjy"]
+[ext_resource type="FontFile" uid="uid://c48adqf17qn7b" path="res://vendor/Kenney Mini Square.ttf" id="2_oxp8d"]
+
+[resource]
+/font_sizes/Regular = 16
+/font_sizes/Small = 12
+/font_sizes/Tall = 22
+/fonts/KenneyBlock = ExtResource("1_rhfjy")
+Button/fonts/font = ExtResource("2_oxp8d")
+Label/font_sizes/Large = 32
+Label/font_sizes/Small = 12
+Label/fonts/font = ExtResource("2_oxp8d")
