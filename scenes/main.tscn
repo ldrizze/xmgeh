@@ -18,7 +18,7 @@ movement_velocity = 50.0
 hud = NodePath("../CanvasLayer/Hud")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBase"]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 

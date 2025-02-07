@@ -57,6 +57,7 @@ func take_damage(damage: float):
 		_dead = true
 		$WeaponPivot.hide()
 		on_dead.emit()
+		$Control.hide()
 		$DamageAnimation.play("dead")
 	
 	# update UI

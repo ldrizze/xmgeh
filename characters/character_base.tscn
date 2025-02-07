@@ -1,16 +1,16 @@
 [gd_scene load_steps=14 format=3 uid="uid://b3wxwx1rau8ke"]
 
-[ext_resource type="Texture2D" uid="uid://dojbq1kmh1mfo" path="res://vendor/tinyDungeon/wizard.png" id="1_n4pnx"]
 [ext_resource type="Material" uid="uid://dah4ivw2uoeo" path="res://materials/damage_material.tres" id="2_lm4h3"]
 [ext_resource type="Script" path="res://characters/character_base.gd" id="2_ojt37"]
-[ext_resource type="Texture2D" uid="uid://dra2mk7t6ek18" path="res://vendor/tinyDungeon/tilemap.png" id="3_73357"]
+[ext_resource type="Texture2D" uid="uid://cgocrdgbo61qn" path="res://sprites/chiefzinho.png" id="3_oqgqx"]
+[ext_resource type="Texture2D" uid="uid://cv75qlwihjgu4" path="res://sprites/cursor.png" id="4_3wb75"]
 [ext_resource type="PackedScene" uid="uid://lmh2uxdp81cu" path="res://skills/skill_base.tscn" id="4_8dqlk"]
 [ext_resource type="PackedScene" uid="uid://dtytvxd6ovx" path="res://skills/bullets/mage_ball.tscn" id="4_rvccc"]
 [ext_resource type="Texture2D" uid="uid://cql36a7f36bs5" path="res://sprites/progressbar-out.png" id="7_nwquq"]
 [ext_resource type="Texture2D" uid="uid://be5drloc2pyit" path="res://sprites/progressbar.png" id="7_o6cpj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6vmq"]
-size = Vector2(14, 14)
+size = Vector2(10, 19)
 
 [sub_resource type="Animation" id="Animation_vgald"]
 length = 0.001
@@ -98,18 +98,20 @@ script = ExtResource("2_ojt37")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 material = ExtResource("2_lm4h3")
-texture = ExtResource("1_n4pnx")
+position = Vector2(0, -8)
+texture = ExtResource("3_oqgqx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -2.5)
 shape = SubResource("RectangleShape2D_n6vmq")
 
 [node name="WeaponPivot" type="Node2D" parent="."]
+z_index = 1
 
 [node name="Weapon" type="Sprite2D" parent="WeaponPivot"]
-position = Vector2(28, 0)
-rotation = 1.5708
-texture = ExtResource("3_73357")
-region_enabled = true
+position = Vector2(22, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_3wb75")
 region_rect = Rect2(153, 170, 16, 16)
 
 [node name="Aim" type="Marker2D" parent="WeaponPivot"]
